@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Офлайн Заметки</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon-192.png">
+</head>
+<body>
+    <div class="container">
+        <h1>Мои Заметки</h1>
+        <div id="offline-status" class="offline">Офлайн-режим</div>
+        <div class="input-area">
+            <textarea id="note-text" placeholder="Введите заметку..."></textarea>
+            <button onclick="saveNote()" id="save-button">Добавить</button>
+        </div>
+        <div id="notes-list" class="notes-list"></div>
+    </div>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .catch(err => console.log('Ошибка регистрации SW:', err));
+            });
+        }
+    </script>
+</body>
+</html>
